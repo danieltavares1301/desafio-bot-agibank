@@ -259,7 +259,7 @@ sfdx force:apex:test:run -n OrderTrackingControllerTest,ServiceScheduleAvailabil
 
 ---
 
-## 📚 Documentação (Diferencial)
+## 📚 Resumo Simples
 - **Arquitetura**: camadas, bot + flows, Named Credential e integrações
 - **Padrões aplicados**: Repository, Factory e services especializados por jornada
 - **Pontos de melhoria**:
