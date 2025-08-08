@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Ass_Return_Available</name>
+        <label>Ass Return Available</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>IsReturnAvailable</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>deliveryTimeFormula</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <environments>Default</environments>
+    <formulas>
+        <name>deliveryTimeFormula</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT(TODAY() -
+DATE(
+    VALUE( RIGHT( {!deliveryDateInput} , 4 ) ),         
+    VALUE( MID(  {!deliveryDateInput} , 4 , 2 ) ),      
+    VALUE( LEFT( {!deliveryDateInput} , 2 ) )            
+) &gt;= 16)</expression>
+    </formulas>
+    <interviewLabel>Check If Return is Available {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Check If Return is Available</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Ass_Return_Available</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>deliveryDateInput</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>IsReturnAvailable</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>
