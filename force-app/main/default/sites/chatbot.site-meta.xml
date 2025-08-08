@@ -19,24 +19,12 @@
     <genericErrorPage>Exception</genericErrorPage>
     <inMaintenancePage>InMaintenance</inMaintenancePage>
     <indexPage>CommunitiesLanding</indexPage>
-    <masterLabel>ESW_web_bot_1754598126747</masterLabel>
+    <masterLabel>chatbot</masterLabel>
     <redirectToCustomDomain>false</redirectToCustomDomain>
     <referrerPolicyOriginWhenCrossOrigin>true</referrerPolicyOriginWhenCrossOrigin>
     <selfRegPage>CommunitiesSelfReg</selfRegPage>
     <siteAdmin>daniel.tavaressouza01938@agentforce.com</siteAdmin>
     <siteGuestRecordDefaultOwner>daniel.tavaressouza01938@agentforce.com</siteGuestRecordDefaultOwner>
-    <siteIframeWhiteListUrls>
-        <url>orgfarm-3d6edf8a1d-dev-ed.develop.my.salesforce.com</url>
-    </siteIframeWhiteListUrls>
-    <siteIframeWhiteListUrls>
-        <url>*.orgfarm-3d6edf8a1d-dev-ed.develop.my.salesforce.com</url>
-    </siteIframeWhiteListUrls>
-    <siteIframeWhiteListUrls>
-        <url>orgfarm-3d6edf8a1d-dev-ed--c.develop.vf.force.com</url>
-    </siteIframeWhiteListUrls>
-    <siteIframeWhiteListUrls>
-        <url>https://orgfarm-3d6edf8a1d-dev-ed.develop.my.site.com</url>
-    </siteIframeWhiteListUrls>
     <siteType>ChatterNetwork</siteType>
-    <urlPathPrefix>ESWwebbot1754598126747vforcesite</urlPathPrefix>
+    <urlPathPrefix>chatbot</urlPathPrefix>
 </CustomSite>

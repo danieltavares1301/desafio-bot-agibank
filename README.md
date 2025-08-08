@@ -4,7 +4,7 @@
 Este repositório implementa o desafio técnico de um chatbot para uma empresa de e-commerce e serviços, utilizando Salesforce (Einstein Bots, Apex, Flows e Embedded Messaging). O bot interage com clientes, toma decisões, integra-se a um banco de dados (Salesforce) e APIs externas, e registra etapas-chave da jornada.
 
 ## Como testar como usuário final
-basta acessar a URL: https://orgfarm-3d6edf8a1d-dev-ed--c.develop.vf.force.com/apex/chatbot, e abrir o bot no canto direito inferior da tela.
+basta acessar a URL: https://orgfarm-3d6edf8a1d-dev-ed.develop.my.site.com/chatbot/s/, e abrir o bot no canto direito inferior da tela.
 
 ## Testar como usuário interno fazendo o papel de atendente
 - Acesse a URL: https://orgfarm-3d6edf8a1d-dev-ed.develop.lightning.force.com/

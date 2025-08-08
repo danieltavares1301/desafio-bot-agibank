@@ -13,6 +13,8 @@
 		<members>OrderTrackingControllerTest</members>
 		<members>OrderTrackingService</members>
 		<members>OrdersApiClient</members>
+		<members>ReturnOrderS3IntegrationController</members>
+		<members>ReturnOrderS3IntegrationQueueable</members>
 		<members>ServiceScheduleAvailability</members>
 		<members>ServiceScheduleAvailabilityTest</members>
 		<name>ApexClass</name>
@@ -24,6 +26,10 @@
 	<types>
 		<members>*</members>
 		<name>Bot</name>
+	</types>
+	<types>
+		<members>chatbot</members>
+		<name>CspTrustedSite</name>
 	</types>
 	<types>
 		<members>standard__ServiceConsole</members>
