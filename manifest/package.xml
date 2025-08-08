@@ -64,6 +64,10 @@
 		<name>MessagingChannel</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>NamedCredential</name>
+	</types>
+	<types>
 		<members>MessagingPermission</members>
 		<name>PermissionSet</name>
 	</types>
