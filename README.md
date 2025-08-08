@@ -10,11 +10,12 @@ basta acessar a URL: https://orgfarm-3d6edf8a1d-dev-ed--c.develop.vf.force.com/a
 - Acesse a URL: https://orgfarm-3d6edf8a1d-dev-ed.develop.lightning.force.com/
 - username: user.agent@gmail.com.orgfarm-3d6edf8a1d
 - senha: agentuser12345
+
 Após isso, basta mudar o próprio status para "Online" na tab "Omni-Channel" que fica na barra inferior da página.
 Com o status Online, o usuário pode atender chamados dos usuários finais.
 
 ## Endpoint
-Mais abaixo é dado no endpoint e os dados que contém nele para teste.
+Mais abaixo é dado o endpoint e os dados que contém nele para teste. Lembre-se que o bot pede números de pedidos e esses estão listados no JSON.
 - Endpoint: https://mocki.io/v1/8c76ff9b-3136-47ba-a939-ce4c4fca41be
 - JSON contido na URL:
 ```json
@@ -42,6 +43,69 @@ Mais abaixo é dado no endpoint e os dados que contém nele para teste.
   }
 ]
 ```
+
+## 🧭 Como Exercitar as Jornadas
+
+Pré-requisitos rápidos:
+- Interface do chat: já acessível em `/apex/chatbot` (ver seção “Como testar como usuário final”).
+- Para escalonamento a humano, deixe um atendente com status Omni-Channel em Online (ver seção “Testar como usuário interno”).
+
+### 1) Rastreamento de Pedido
+Passo a passo:
+1. Abra o chat e envie: “Rastrear pedido” ou “Status do pedido”.
+2. Quando solicitado, informe um número existente no mock, por exemplo: `12345`, `56789` ou `09876`.
+3. O bot consulta a API mock (Named Credential `OrdersAPI`) e retorna o status e a data de entrega.
+4. Em caso de sucesso, o Salesforce é atualizado: se o pedido não existir, ele é criado e relacionado ao cliente; se existir, apenas o status/data são atualizados.
+
+Exemplos de saída:
+- Resposta esperada: status “Pedido enviado” e data “15/08/2025” (conforme JSON do endpoint de exemplo).
+
+Verificações no Salesforce:
+- Vá em `Order` e procure pelo número informado. Verifique `Status` e `EndDate`.
+- Caso novo: observe também `Account` e `Contract` criados/relacionados.
+
+Cenários alternativos:
+- Número inexistente: o bot responde “Pedido não encontrado”.
+- Erro de integração (mock fora do ar): o bot responde “Falha na integração”.
+
+### 2) Suporte Técnico
+Passo a passo:
+1. No menu principal do chat, escolha “Suporte técnico”.
+2. O bot coleta um breve resumo do problema (ex.: “Produto não liga”).
+3. O fluxo cria um `Case` e retorna o número de protocolo ao cliente.
+4. Se necessário, o bot oferece encaminhar para um atendente humano.
+
+Exemplos de saída:
+- Resposta esperada: confirmação e “Case criado” com um número de protocolo.
+
+Verificações no Salesforce:
+- Acesse a guia `Cases` e filtre pelos mais recentes. Confirme o `Subject/Description` e o `Case Origin` vindo do bot.
+- Para atendimento humano, garanta um agente com Omni-Channel em Online; o chamado será roteado quando apropriado.
+
+### 3) Política de Devolução
+Passo a passo:
+1. No menu principal do chat, escolha “Política de devolução”.
+2. O bot informa os requisitos (ex.: prazo).
+3. Se elegível, o fluxo inicia o processo de devolução criando um registro no Salesforce para acompanhamento.
+
+Verificações no Salesforce:
+- Verifique registros criados para a devolução (por exemplo, um `Case` categorizado como devolução ou registros relacionados ao pedido), de acordo com o fluxo configurado.
+
+Cenários alternativos:
+- Não elegível: o bot explica o motivo (fora do prazo, requisitos não atendidos, etc.).
+
+### 4) Contratação de Serviço
+Passo a passo:
+1. No menu principal do chat, escolha “Contratação de serviço”.
+2. O bot lista as opções disponíveis com base nos registros de `Service__c` que podem ser “Suporte premium/Instalação/Consultoria”.
+3. O bot coleta dados necessários.
+4. A solução verifica disponibilidade/custos (Apex/Flow) e agenda um evento na agenda do Agent User.
+
+Verificações no Salesforce:
+- Confira `Service__c` (catálogo), e registros gerados para a solicitação (ex.: atividades/eventos ligados ao cliente) conforme o fluxo.
+
+---
+
 ### Objetivos do Desafio (Resumo)
 - **Rastreamento de Pedido**: solicitar número do pedido, consultar API externa de logística e retornar status.
 - **Suporte Técnico**: coletar detalhes, abrir Case, retornar protocolo e escalar para humano quando necessário.
@@ -192,20 +256,6 @@ sfdx force:user:permset:assign -n <NOME_DO_PERMISSION_SET>
 sfdx force:apex:test:run -n OrderTrackingControllerTest,ServiceScheduleAvailabilityTest -r human -w 10
 ```
 - Dica: use `sfdx force:apex:test:report -i <TEST_RUN_ID>` para relatório detalhado. A meta do desafio é **≥ 85%** de cobertura agregada.
-
----
-
-## 🧭 Como Exercitar as Jornadas
-- **Rastreamento de Pedido**: No chat, solicite “Rastrear pedido”, informe um número existente no mock (ex.: `12345`).
-- **Suporte Técnico**: “Tenho um problema” → bot coleta detalhes → `Case` criado com protocolo.
-- **Política de Devolução**: “Quero devolver” → bot explica critérios → Flow cria registro se aplicável.
-- **Contratar Serviço**: “Quero contratar um serviço” → bot lista opções (`Service__c`) → verifica disponibilidade/custos → agenda/gera orçamento.
-
----
-
-# (Opcional) carregar dados de exemplo em Service__c via Data Import Wizard ou sfdx data
-```
-- Compartilhar usuário de teste: criar usuário padrão e enviar credenciais temporárias (ou habilitar Guest no site do Embedded Messaging, se aplicável).
 
 ---
 
