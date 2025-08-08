@@ -268,7 +268,7 @@ sfdx force:apex:test:run -n OrderTrackingControllerTest,ServiceScheduleAvailabil
 ---
 
 ## 👥 Equipe e Contatos
-- Desenvolvedor: Daniel Tavares Souza
+- Desenvolvedor: Daniel Tavares de Souza
 - Organização: Agibank (projeto demonstrativo)
 - Plataforma: Salesforce
 
